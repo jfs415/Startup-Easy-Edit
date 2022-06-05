@@ -44,13 +44,16 @@ def __delete(filepath: str):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 0 or sys.argv[0].lower() == 'add':  # Assume add if no args provided
+    if len(sys.argv) == 1 or sys.argv[1].lower() == 'add':  # Assume add if no args provided
         source_location = filedialog.askopenfilename(initialdir=__get_apps_folder(), title="Select a File", filetypes=(("Application", "*.exe*"), ("All Files", "*.*")))
-        if source_location is not None:
-            __copy(source_location)
-        else:
+
+        if source_location == "":
+            sys.exit(0)
+        elif source_location is None:
             print("This platform is not supported!")
-    elif sys.argv[0].lower() == 'remove':
+        else:
+            __copy(source_location)
+    elif sys.argv[1].lower() == 'remove':
         pass  # TODO
 
 
